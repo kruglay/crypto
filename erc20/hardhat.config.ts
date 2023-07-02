@@ -87,7 +87,7 @@ const config: {} = {
         mnemonic,
       },
       chainId: chainIds.hardhat,
-    },
+    },   
     arbitrum: getChainConfig("arbitrum-mainnet"),
     avalanche: getChainConfig("avalanche"),
     bsc: getChainConfig("bsc"),
