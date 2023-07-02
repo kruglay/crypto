@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 import "./interfaces/IERC20.sol";
 
-contract MyToken is IERC20 {    
+contract MyToken is IERC20 {
     string public name;
     string public symbol;
     uint8 public decimals;
