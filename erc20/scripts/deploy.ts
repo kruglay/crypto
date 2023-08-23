@@ -9,26 +9,26 @@ const delay = async (time: number) => {
 }
 
 async function main() {
-  const name = "MyToken";
-  const symbol = "MTK";
+	const name = "MyToken";
+	const symbol = "MTK";
 
-  const MyToken = await ethers.getContractFactory("MyToken");
-  const myToken = await MyToken.deploy(name, symbol);
+	const MyToken = await ethers.getContractFactory("MyToken");
+	const myToken = await MyToken.deploy(name, symbol);
 
-  await myToken.deployed();
+	await myToken.waitForDeployment();
 
-  console.log(
-    `MyToken contract deployed to ${myToken.address}`
-  );
+	console.log(
+		`MyToken contract deployed to ${myToken.target}`
+	);
 
-  console.log('wait of delay...')
+	console.log('wait of delay...')
 	await delay(15000) // delay 15 secons
 	console.log('starting verify token...')
 	try {
 		await run('verify:verify', {
-			address: myToken!.address,
+			address: myToken!.target,
 			contract: 'contracts/MyToken.sol:MyToken',
-			constructorArguments: [ name, symbol ],
+			constructorArguments: [name, symbol],
 		});
 		console.log('verify success')
 	} catch (e: any) {
@@ -39,6 +39,6 @@ async function main() {
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+	console.error(error);
+	process.exitCode = 1;
 });

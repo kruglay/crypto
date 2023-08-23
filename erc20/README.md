@@ -31,3 +31,6 @@ Verify the installation by running the following command:
 npx hardhat verify --network polygon-mumbai {TOKEN_ADDRESS} "MyToken" "MTK"
 ```
 Note: Replace {TOKEN_ADDRESS} with the address of the token, "MyToken" with the name of the token and "MTK" with the symbol of the token.
+
+## Ref to contract
+https://mumbai.polygonscan.com/address/0xE360503D994ed6520A6d81Ed5E292f73A8f9Abda#code

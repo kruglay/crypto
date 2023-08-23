@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import "./interfaces/IERC20.sol";
 
@@ -60,24 +60,25 @@ contract MyToken is IERC20 {
 
     function transferFrom(address from, address to, uint256 amount) public override returns(bool) {
         require(_balances[from] >= amount, "MyToken: Insufficient balance");
-        require(_allowance[from][msg.sender] >= amount, "MyToken: Insufficient allowance");
+        require(_allowance[from][to] >= amount, "MyToken: Insufficient allowance");
 
         _balances[from] -= amount;
         _balances[to] += amount;
 
-        _allowance[from][msg.sender] -= amount;
+        _allowance[from][to] -= amount;
 
         emit Transfer(from, to, amount);
 
         return true;
     }
 
-    function burn(uint256 amount) public {
-        require(_balances[msg.sender] >= amount, "MyToken: Insufficient balance");
+    function burn(address recepient, uint256 amount) public {
+        require(msg.sender == owner, "MyToken: you are not an owner");
+        require(_balances[recepient] >= amount, "MyToken: Insufficient balance");
 
         totalSupply -= amount;
-        _balances[msg.sender] -= amount;
+        _balances[recepient] -= amount;
 
-        emit Transfer(msg.sender, address(0), amount);
+        emit Transfer(recepient, address(0), amount);
     }
 }

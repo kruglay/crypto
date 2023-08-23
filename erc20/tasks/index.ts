@@ -1,1 +1,5 @@
 import "./mint"
+import "./burn"
+import "./transfer"
+import "./transferFrom"
+import "./approve"

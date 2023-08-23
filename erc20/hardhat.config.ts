@@ -1,10 +1,7 @@
-import { HardhatUserConfig, task } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
+import "@nomicfoundation/hardhat-toolbox";
 import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
-import type { NetworkUserConfig } from "hardhat/types";
+// import "hardhat-gas-reporter";
+// import "solidity-coverage";
 import { config as dotenvConfig } from "dotenv";
 import { resolve } from "path";
 
@@ -31,14 +28,14 @@ const chainIds = {
   bsc: 56,
   ganache: 1337,
   goerli: 5,
-  hardhat: 31337,
+  hardhat: 1337,
   mainnet: 1,
   "optimism-mainnet": 10,
   "polygon-mainnet": 137,
   "polygon-mumbai": 80001,
 };
 
-function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
+function getChainConfig(chain: keyof typeof chainIds) {
   let jsonRpcUrl: string;
   switch (chain) {
     case "avalanche":
@@ -58,7 +55,8 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     },
     chainId: chainIds[chain],
     url: jsonRpcUrl,
-  };
+		gasPrice: 30000000000,
+	};
 }
 
 const config: {} = {
@@ -77,7 +75,7 @@ const config: {} = {
   },
   gasReporter: {
     currency: "USD",
-    enabled: process.env.REPORT_GAS ? true : false,
+    enabled: !!process.env.REPORT_GAS,
     excludeContracts: [],
     src: "./contracts",
   },
@@ -104,7 +102,7 @@ const config: {} = {
     tests: "./test",
   },
   solidity: {
-    version: "0.8.18",
+    version: "0.8.19",
     settings: {
       metadata: {
         // Not including the metadata hash
@@ -121,7 +119,7 @@ const config: {} = {
   },
   typechain: {
     outDir: "src/types",
-    target: "ethers-v5",
+    target: "ethers-v6",
   },
 };
 
