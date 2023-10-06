@@ -16,4 +16,4 @@ task('checkLP', 'Check LP token')
     } else {
       console.log(`${contract} is not a valid Etherium address.`);
     }    
-  })
+  });
