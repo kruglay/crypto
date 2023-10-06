@@ -23,7 +23,7 @@ describe('Farming contract', async () => {
     await RewardToken.waitForDeployment();
     await StakingToken.waitForDeployment();
 
-    const FarmingContract = await (new Farming__factory(owner)).deploy(StakingToken.getAddress(), RewardToken.getAddress());
+    const FarmingContract = await (new Farming__factory(owner)).deploy(StakingToken.target, RewardToken.target);
 
     await FarmingContract.waitForDeployment();
 
