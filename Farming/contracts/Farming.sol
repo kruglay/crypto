@@ -7,8 +7,6 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 contract Farming {
     using SafeERC20 for IERC20Metadata;
 
-    event Log(string, uint256);
-
     struct User {
         uint256 amount;
         uint256 depositTime;
