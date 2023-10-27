@@ -94,6 +94,7 @@ contract Farming {
     function withdraw() external {
         require(users[msg.sender].claimed, "Claim rewards first");
         SafeERC20.safeTransfer(stakingToken, msg.sender, users[msg.sender].amount);
+        users[msg.sender].amount = 0;
 
         emit Withdraw(msg.sender);
     }
